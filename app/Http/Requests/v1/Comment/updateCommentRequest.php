@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Http\Requests\v1\Comment;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class updateCommentRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+          'body'=>'sometimes|string|max:255',
+          'post_id'=>'sometimes|int|exists:posts,id'
+        ];
+    }
+}
