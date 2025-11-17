@@ -23,7 +23,7 @@ class updateCommentRequest extends FormRequest
     {
         return [
           'body'=>'sometimes|string|max:255',
-          'post_id'=>'sometimes|int|exists:posts,id'
+          
         ];
     }
 }
