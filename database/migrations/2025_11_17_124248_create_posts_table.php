@@ -16,8 +16,9 @@ return new class extends Migration
             $table->string('title');
             $table->string('abstract')->nullable();
             $table->string('body');
+            $table->string('status');
             $table->foreignId('author_id')->nullable()->constrained('users')->onDelete('set null');
-            $table->foreignId('category_id')->constrained('category')->onDelete('cascade');
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
