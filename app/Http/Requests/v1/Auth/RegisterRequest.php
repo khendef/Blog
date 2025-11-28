@@ -24,7 +24,8 @@ class RegisterRequest extends FormRequest
         return [
             'name'=>'required|string|max:255',
             'email'=>'required|email|unique:users,email',
-            'password'=>'required|confirmed|password'
+            'password'=>'required|confirmed',
+            'is_admin'=>'required|boolean'
         ];
     }
 }

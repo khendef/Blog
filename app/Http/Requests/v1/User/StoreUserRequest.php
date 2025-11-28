@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\v1;
+namespace App\Http\Requests\v1\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +24,8 @@ class StoreUserRequest extends FormRequest
         return [
             'name'=>'required|string|max:255',
             'email'=>'required|email|unique:users,email',
-            'password'=>'required|confirmed|password|min:8|max:16'
+            'password'=>'required|confirmed|min:8|max:16',
+            'is_admin'=>'required|boolean'
             
         ];
     }

@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Post::observe(PostObserver::class);
         
-        Gate::define('update-post', function ($user, $post) {
+        Gate::define('update_post', function ($user, $post) {
             // for update and delete
             if ($user->is_admin){
                  return true;
@@ -32,15 +32,15 @@ class AppServiceProvider extends ServiceProvider
             return $user->id === $post->author_id;
         });
 
-        Gate::define('update-comment', function ($user, $comment) {
+        Gate::define('update_comment', function ($user, $comment) {
             // only user who made the comment can update its body
-            return $user->id === $comment->author_id;
+            return $user->id === $comment->user_id;
         });
-        Gate::define('delete-comment', function ($user, $comment) {
+        Gate::define('delete_comment', function ($user, $comment) {
             if ($user->is_admin){ // admin can delete other users comments
                  return true;
             } 
-            return $user->id === $comment->author_id;
+            return $user->id === $comment->user_id;
         });
 
         Gate::define('admin_only', function($user) {

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\api\v1;
 
-use App\Http\Requests\v1\StoreUserRequest;
+use App\Http\Requests\v1\User\StoreUserRequest;
 use App\Http\Requests\v1\User\UpdateUserRequest;
 use App\Models\User;
 use Exception;
@@ -43,7 +43,7 @@ class UserController extends Controller
    
     public function update(UpdateUserRequest $request, User $user)
     {
-            $user = User::update($request->validated());
+            $user->update($request->validated());
             return self::success($user);
        
     }

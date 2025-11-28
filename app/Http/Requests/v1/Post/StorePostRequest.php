@@ -24,9 +24,10 @@ class StorePostRequest extends FormRequest
         return [
             'title'=>'required|string|max:255',
             'abstract'=>'nullable|string|max:255',
-            'body'=>'required|string|min:255',
+            'body'=>'required|string|min:255|max:2000',
             'category_id'=>'required|int|exists:categories,id',
             'comment' => 'nullable|string',
+            'status'=>'required|string'
         ];
     }
 }

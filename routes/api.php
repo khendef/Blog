@@ -20,7 +20,7 @@ Route::group([
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
     Route::post('/refresh', [AuthController::class, 'refresh'])->middleware('auth:api');
-    Route::post('/profile', [AuthController::class, 'profile'])->middleware('auth:api');
+    Route::get('/profile', [AuthController::class, 'profile'])->middleware('auth:api');
 });
 
 Route::group(['prefix' => '/v1'],function(){
@@ -49,13 +49,14 @@ Route::group(['prefix' => '/v1'],function(){
         Route::put('categories/{category}', [CategoryController::class, 'update']);
         Route::delete('categories/{category}', [CategoryController::class, 'destroy']);   
 
+        Route::get('/users', [UserController::class, 'index']);      
+        Route::get('/users/{user}', [UserController::class, 'show']);
         Route::post('users', [UserController::class, 'store']);
         Route::put('users/{user}', [UserController::class, 'update']);
         Route::delete('users/{user}', [UserController::class, 'destroy']);
     });
 
-    Route::get('/admin/users', [UserController::class, 'index']);      
-    Route::get('/admin/users/{user}', [UserController::class, 'show']);
+    
 
 });
 

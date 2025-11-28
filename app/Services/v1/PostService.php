@@ -25,24 +25,24 @@ class PostService
 
    public function store($data)
    {
-        try{
+       // try{
                 return DB::transaction(function() use($data) {
-
                 $data['author_id'] = auth()->user()->id;
                 $post = Post::create($data);
-
                 if(isset($data['comment'])){
                     $post->comments()->create([
                         'user_id' => auth()->user()->id,
                         'body' => $data['comment']
                     ]);
                 } 
-                $post->load('author:id, name');           
+                $post->load(['author' => function ($query) {
+                                $query->select('id', 'name'); 
+                            }]);           
                 return $post;  
             });
-        }catch(Exception $e){
-            \log::error("Message: ".$e->getMessage()."File: ".$e->getFile()."Line: ".$e->getLine());
-        }
+      //  }catch(Exception $e){
+      //      \log::error("Message: ".$e->getMessage()."File: ".$e->getFile()."Line: ".$e->getLine());
+      // }
    }
 
 }

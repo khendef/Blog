@@ -13,6 +13,16 @@
 				{
 					"name": "view users",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -31,6 +41,16 @@
 				{
 					"name": "show user",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -46,7 +66,42 @@
 							"variable": [
 								{
 									"key": "userId",
-									"value": "2"
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/admin/users/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "7"
 								}
 							]
 						}
@@ -56,6 +111,16 @@
 				{
 					"name": "create user",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -66,7 +131,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"joe\",\r\n  \"email\": \"joe@example.com\",\r\n  \"password\": \"12345\"\r\n}",
+							"raw": "{\r\n  \"name\": \"joe\",\r\n  \"email\": \"joe@example.com\",\r\n  \"is_admin\": false,\r\n  \"password\": \"12345678\",\r\n  \"password_confirmation\":\"12345678\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -81,6 +146,56 @@
 							"path": [
 								"admin",
 								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n  \"is_admin\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/users/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "7"
+								}
 							]
 						}
 					},
@@ -131,15 +246,824 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "create post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \r\n  \"title\": \"post title\",\r\n  \"category_id\":\" 1\",\r\n  \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit Phasellus ut velit vel erat tincidunt tristique. Suspendisse potenti. Cras vitae nibh id justo fermentum mattis. Integer semper, nunc sed facilisis luctus, neque massa laoreet nibh, nec viverra justo dolor vel lacus. \",\r\n  \"status\": \"pending\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/posts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"post updated title\" \r\n  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/posts/:postId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts",
+								":postId"
+							],
+							"variable": [
+								{
+									"key": "postId",
+									"value": "9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/posts/:postId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts",
+								":postId"
+							],
+							"variable": [
+								{
+									"key": "postId",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
+		},
+		{
+			"name": "comments",
+			"item": [
+				{
+					"name": "all comments",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"joe\",\r\n  \"email\": \"joe@example.com\",\r\n  \"password\": \"12345\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/posts/:postId/comments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts",
+								":postId",
+								"comments"
+							],
+							"variable": [
+								{
+									"key": "postId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show comment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/posts/:postId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts",
+								":postId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "postId",
+									"value": "1"
+								},
+								{
+									"key": "commentId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"body\" : \"this is jane comment \"          \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/posts/:postId/comments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts",
+								":postId",
+								"comments"
+							],
+							"variable": [
+								{
+									"key": "postId",
+									"value": "8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"body\": \"jane updated comment\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/posts/:postId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts",
+								":postId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "postId",
+									"value": "8"
+								},
+								{
+									"key": "commentId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/posts/:postId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts",
+								":postId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "postId",
+									"value": "8"
+								},
+								{
+									"key": "commentId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categories",
+			"item": [
+				{
+					"name": "all categories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"joe\",\r\n  \"email\": \"joe@example.com\",\r\n  \"password\": \"12345\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/categories/:categoryId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories",
+								":categoryId"
+							],
+							"variable": [
+								{
+									"key": "categoryId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create category",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\" : \" Math\"\r\n      \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Biology\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/categories/:categoryId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"categories",
+								":categoryId"
+							],
+							"variable": [
+								{
+									"key": "categoryId",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/categories/:categoryId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"categories",
+								":categoryId"
+							],
+							"variable": [
+								{
+									"key": "categoryId",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"\r",
+									"\r",
+									"pm.environment.set (\"token\" , response.data.token);\r",
+									"console.log(response.data.token);\r",
+									"console.log(pm.environment.get(\"token\"));\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n  \"email\": \"john@example.com\",\r\n  \"password\": \"12345678\"\r\n \r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\" : \"jane\",\r\n  \"email\": \"jane@example.com\",\r\n  \"password\": \"12345678\",\r\n  \"password_confirmation\":\"12345678\",\r\n  \"is_admin\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.unset(\"token\");\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/auth/logout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/auth/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/auth/refresh",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "",
-			"type": "default"
+			"value": ""
 		}
 	]
 }

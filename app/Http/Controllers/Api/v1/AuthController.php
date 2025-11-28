@@ -8,6 +8,7 @@ use App\Http\Requests\v1\Auth\RegisterRequest;
 use App\Services\v1\Auth\AuthService;
 use Illuminate\Http\Request;
 use PHPOpenSourceSaver\JWTAuth\Contracts\Providers\Auth;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -33,7 +34,7 @@ class AuthController extends Controller
 
     public function logout(){
 
-        auth()->logout();
+        auth()->guard('api')->logout();
         return self::success(null,'Successfully logged out');
     }
 
@@ -42,6 +43,13 @@ class AuthController extends Controller
     }
 
     public function refresh(){
-        return self::success(auth()->refresh());
+        $token = JWTAuth::getToken();
+        $token = JWTAuth::refresh($token);
+        $data = [
+            'status'=>'success',
+            'user'=>auth()->user(),
+            'token'=>$token
+        ];
+        return self::success($data);
     }
 }

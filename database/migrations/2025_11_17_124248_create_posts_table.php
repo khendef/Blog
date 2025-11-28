@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('abstract')->nullable();
-            $table->string('body');
+            $table->text('body');
             $table->string('status');
             $table->foreignId('author_id')->nullable()->constrained('users')->onDelete('set null');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');

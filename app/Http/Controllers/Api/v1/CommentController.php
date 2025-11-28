@@ -43,14 +43,14 @@ class CommentController extends Controller
     }
 
     
-    public function update(updateCommentRequest $request, Comment $comment , Post $post)
+    public function update(updateCommentRequest $request , Post $post, Comment $comment)
     {
         $post = $this->commentService->update($request->validated(),$comment,$post);
         return self::success($post);
     }
 
     
-    public function destroy(Comment $comment)
+    public function destroy(Post $post, Comment $comment)
     {
         $comment->delete();
         return self::success(null, 'comment deleted successfully' ,204);

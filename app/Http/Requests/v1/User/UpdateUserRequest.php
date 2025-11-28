@@ -24,7 +24,8 @@ class UpdateUserRequest extends FormRequest
        return [
             'name'=>'sometimes|string|max:255',
             'email'=>'sometimes|email|unique:users,email',
-            'password'=>'sometimes|confirmed|password|min:8|max:16'
+            'password'=>'sometimes|confirmed|password|min:8|max:16',
+            'is_admin'=>'sometimes|boolean'
             
         ];
     }
